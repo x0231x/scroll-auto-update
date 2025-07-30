@@ -1,6 +1,6 @@
 # scroll-auto-update（React + TypeScript + Tailwind v3）
 
-這是一個**最小可執行的無限卷軸示範**，採用 **Create React App + TypeScript 5 + Tailwind CSS v3.4**。  
+這是一個**最小可執行的無限卷軸示範**，採用 **Create React App + TypeScript + Tailwind CSS v3.4**。  
 畫面一次載入 3 筆水果卡片，當最後一筆進入視窗時（多預留 200 px），自動載入下一批資料。
 
 ## 專案結構（摘要）  
@@ -29,7 +29,7 @@ yarn start
 
 首次掛載 -> loadNext() 切出第一批 3 筆。  
 
-每次 items 增加，新的「最後一筆 <li>」被指定為 sentinel。  
+每次 items 增加，新的「最後一筆li」被指定為 sentinel。  
 
 IntersectionObserver 監看該 sentinel；只要進入視窗（含 rootMargin 多預留的 200 px），就再切下一批加入。  
 
