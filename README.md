@@ -1,46 +1,36 @@
-# Getting Started with Create React App
+# scroll-auto-update（React + TypeScript + Tailwind v3）
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+這是一個**最小可執行的無限卷軸示範**，採用 **Create React App + TypeScript 5 + Tailwind CSS v3.4**。  
+畫面一次載入 3 筆水果卡片，當最後一筆進入視窗時（多預留 200 px），自動載入下一批資料。
 
-## Available Scripts
+## 專案結構（摘要）
+src/
+├── App.tsx # 主要元件（無限卷軸邏輯）
+├── fake-data.ts # 水果資料
+├── types.ts # Fruit 介面
+└── index.css # Tailwind 
 
-In the project directory, you can run:
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 環境需求
+- **Node.js 20.18.1**
+- **Yarn 1.22**
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 安裝與執行
 
-### `npm test`
+# 安裝相依
+yarn
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# 啟動開發伺服器（http://localhost:3000）
+yarn start
 
-### `npm run build`
+### 運作流程
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+首次掛載 -> loadNext() 切出第一批 3 筆。
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+每次 items 增加，新的「最後一筆 <li>」被指定為 sentinel。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+IntersectionObserver 監看該 sentinel；只要進入視窗（含 rootMargin 多預留的 200 px），就再切下一批加入。
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+items.length === fakeData.length 時 hasMore 為 false，停止載入並顯示「已顯示全部資料」。
